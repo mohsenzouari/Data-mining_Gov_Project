@@ -1,0 +1,24 @@
+installation charm :
+taper la commande suivante :
+make
+-----------------------------------------------------------------
+exécution charm:
+
+./charm -x -i  entree.ascii  -o  sortie  -s 0.1 -r 0.5  -d 0 -l
+ 
+cette commande permet d'extraire les items fermés fréquents et les règles associatives. 
+Vous pouvez  supprimer les  items  fermés après si vous n'avez pas besoin.
+ 
+Vous devez copier le contenu de votre fichier d'entée dans le fichier "entree.ascii"   
+(en pièce jointes)  par ce que l'entrée doit être sous format ascii.
+ 
+
+Pour tester, utilise le fichier "testdb.ascii" avec la commande:
+
+./charm -x -i testdb_ibm.ascii -o sortie -s 0.2 -r 0.4 -R
+
+Tu dois essayer avec des minsupp plus petit genre 0.01 ou 0.001 et minconf 0 au départ pour générer toutes les règles possibles au départ puis tu peux varier tes paramètres en fonction de la sortie.
+
+utilise par exemple cette commande:
+
+./charm -x -i entree.ascii -o sortie -s 0.01 -r 0 -R

@@ -1,0 +1,66 @@
+
+First try running a dataset with high values of support to get a feel
+for what the output is like, without generating the rules.
+
+For example: charm -i G1.asc -S 5 -C G1.cons -o COUT
+
+Here G1.asc is your gene file (although I need to add the number of
+items on each line as the third entry). I have a perl script for that
+"addnumitems.pl"
+
+-S 5 means mine patterns with at least minsup of 5
+
+-o COUT means print to stdout, you can also give an output file name
+
+-C G1.cons means that G1.cons is a contraints file
+   //read the constraints, one per line
+   //if first field is C then it is an col/attribute constraint
+   //if first field is R then it is a row constraint
+   //items on each line are considered to be conjunctions
+   //different lines are considered as disjunctions
+   //each line is assumed to be sorted in increasing order	
+   // the semantics are that each pattern must satisfy at least one 
+   //row constraint and one column constraint.
+
+an example constraints file is shown for G1.asc datafile
+Here I am saying that only those items 'C' specified are the ones
+whose extesnions will be reported, and at least those genes specified
+in 'R' must be in each closed sets geneset.
+
+
+Now say you want to see the gene ids also, which support each itemset, 
+then run  it as:
+charm -i G1.asc -S 5 -C G1.cons -o COUT -d 0 -l
+
+The -l prints the geneids, and -d 0 turns off diffsets, so that each
+list printed in [ ] after an itemset is indeed a tidset of gene ids.
+
+Finally to print the self rules, run it as: charm -i G1.asc -S 5 -C
+G1.cons -o COUT -d 0 -l -E -R -r 1.0
+
+-r 1.0 means mine rules with min conf 1.0 -R means print rules -E
+means print only self rules
+
+This will print out the rules, e.g.  SELF 24 <==> 1626 ( 8 1 ) which
+means that 8 genes support it and conf is 1
+
+to see which 8 genes support it, just go to the list of closed sets
+and see which one has support 8 and contains both 24 and 1626. The
+geneset of that closed set is the same as the geneset for this rule.
+
+BTW, I also have one other option to restrict the number of closed
+rules.  try -Z <maxlen> to not produce any new closed set with length
+more than maxlen.  note that this will still report a long closed set,
+if for example a set smaller than maxlen actually corresponds to,
+i.e., is equivalent to the longer closed set.
+
+Finally, you can store the mined rules in a file, say foo charm -i
+G1.asc -S 5 -C G1.cons -o COUT -d 0 -l -E -R -r 1.0 > foo or charm -i
+G1.asc -S 5 -C G1.cons -o foo -d 0 -l -E -R -r 1.0
+
+then you can run "remap.pl foo G1.labels" to convert each rule into a
+readable format.
+
+Finally, you can turn on the -F option to generate conditional rules
+
+and -L option to print the lattice

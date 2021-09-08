@@ -1,0 +1,45 @@
+
+1) two types of datasets are supported
+   - ibm format (cid tid #items itemset)
+	Here each line contains the 
+	   customerid, transid, number of items, and list of items
+
+   - basic ascii format (itemset) 
+        Here each line is just a list of items
+
+  only integer datasets are supported
+
+  two example test databases are included in the dir
+  	testdb_ibm.ascii (in ibm format)
+	testdb.ascii (non-ibm format)
+
+2) type charm to see the list of options supported
+
+  a basic run of charm is as follows:
+	charm -i <DB> -o <PAT_OUT> -s <MINSUP> -r <MINCONF> 
+	
+	this will mine the database file <DB>
+	it will output the closed freq patterns to file <PAT_OUT>
+	it will use MINSUP as the relative minsup (e.g. 0.5 is 50%)
+	it will use MINCONF as the minimum conf for the rules
+	both MINSUP and MINCONF must be between 0 and 1.
+	the rules are printed to stdout if -R flag is given.
+	
+        EXAMPLE: charm -i testdb_ibm.ascii -o patout -s 0.5 -r 0.75 -R
+
+	some example rules are:
+	100% 2  ==> 1  ( 4 1 )
+	explanation: this is a 100% conf rule, the rule is 2 ==> 1,
+		the rule support is 4, and the rule conf is 1 (100%)
+	<100% 1  ==> 4  ( 5 0.833333 )
+	explanation: this is a <100% conf rule, the rule is 1 ==> 4,
+		the rule support is 5, and the rule conf is 0.83 (83.3%)
+
+	TO RUN NON_IBM DB without offset:
+	just add the -x flag (for non-ibm datasets)
+	EXAMPLE: charm -x -i testdb.ascii -o patout -s 0.5 -r 0.75
+
+	
+./charm -x -i testdb.ascii -o rt -S 2
+
+./charm -x -i testdb.ascii -o rt  -s 0.01

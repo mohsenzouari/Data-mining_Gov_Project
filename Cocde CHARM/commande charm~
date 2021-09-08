@@ -1,0 +1,1 @@
+./charm -x -i testdb_ibm.ascii -o rt -s 0.1 -d 0 -l

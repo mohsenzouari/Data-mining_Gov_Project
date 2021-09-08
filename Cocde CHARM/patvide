@@ -1,0 +1,42 @@
+2 1 - 2 [2 6 ]
+0 3 4 1 - 2 [1 5 ]
+3 1 - 4 [1 3 5 6 ]
+3 1 4 - 3 [1 3 5 ]
+4 1 - 5 [1 2 3 4 5 ]
+1 - 6 [1 2 3 4 5 6 ]
+100% 2  ==> 1  ( 2 1 )
+<100% 1  ==> 2  ( 2 0.333333 )
+100% 3  ==> 1  ( 4 1 )
+<100% 1  ==> 3  ( 4 0.666667 )
+100% 4  ==> 1  ( 5 1 )
+<100% 1  ==> 4  ( 5 0.833333 )
+<100% 3  ==> 4  ( 3 0.75 )
+<100% 4  ==> 3  ( 3 0.6 )
+100% 0  ==> 3 4  ( 2 1 )
+<100% 3 4  ==> 0  ( 2 0.666667 )
+RULE SUMMARY : (minconf) (num closed rules) (num examined)
+0 10 12
+NODE : 1 ( 6 )
+PARENTS : 1 2 ( 2 ) , 1 3 ( 4 ) , 1 4 ( 5 ) , 
+CHILDREN : 
+MINGENS : 1  , 
+NODE : 1 2 ( 2 )
+PARENTS : ( 0 ) , 
+CHILDREN : 1 ( 6 ) , 
+MINGENS : 2  , 
+NODE : 1 3 ( 4 )
+PARENTS : 1 3 4 ( 3 ) , 
+CHILDREN : 1 ( 6 ) , 
+MINGENS : 3  , 
+NODE : 1 4 ( 5 )
+PARENTS : 1 3 4 ( 3 ) , 
+CHILDREN : 1 ( 6 ) , 
+MINGENS : 4  , 
+NODE : 1 3 4 ( 3 )
+PARENTS : 0 1 3 4 ( 2 ) , 
+CHILDREN : 1 3 ( 4 ) , 1 4 ( 5 ) , 
+MINGENS : 3 4  , 
+NODE : 0 1 3 4 ( 2 )
+PARENTS : ( 0 ) , 
+CHILDREN : 1 3 4 ( 3 ) , 
+MINGENS : 0  , 
